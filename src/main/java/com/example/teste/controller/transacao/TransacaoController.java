@@ -12,10 +12,11 @@ import java.util.List;
 @RequestMapping("/transacao")
 public class TransacaoController {
     //List<Transacao> transacoes = new ArrayList<>();
+    TransacaoService Service;
 
     @PostMapping
     public ResponseEntity<?> postTransacao(@RequestBody @Valid Transacao transacao){
-
+        Service.addTransacao(transacao);
         return ResponseEntity.status(201).build();
     }
     @GetMapping
