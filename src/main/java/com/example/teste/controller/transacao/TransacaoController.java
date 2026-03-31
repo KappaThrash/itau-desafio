@@ -16,20 +16,24 @@ public class TransacaoController {
     //List<Transacao> transacoes = new ArrayList<>();
 
 
-    private TransacaoService Service;
+    private final TransacaoService service;
+
+    public TransacaoController(TransacaoService service) {
+        this.service = service;
+    }
 
     @PostMapping
     public ResponseEntity<?> postTransacao(@RequestBody @Valid Transacao transacao){
-        Service.addTransacao(transacao);
+        service.addTransacao(transacao);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
     @GetMapping
     public ResponseEntity<List<Transacao>> getTransacao(){
-        return ResponseEntity.status(200).body(Service.getTransacoes());
+        return ResponseEntity.status(200).body(service.getTransacoes());
     }
     @DeleteMapping
     public ResponseEntity<?> deleteTransacao(){
-        Service.clearTransacoes();
+        service.clearTransacoes();
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 }
