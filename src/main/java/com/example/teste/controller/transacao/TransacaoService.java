@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.List;
 
@@ -23,8 +24,11 @@ public class TransacaoService {
     public void addTransacao( Transacao transacao ){
         if (transacao.getDataHora().isAfter(now)){
             throw new InvalidDateException("dataHora invalido, pois está no futuro");
-        }
+        } else if(transacao.getValor().compareTo(new BigDecimal(0)) < 0 ) {
+            throw new IllegalArgumentException("Valor negativo");
+        } else{
         TransacaoRepository.save(transacao);
+        }
     }
     public void clearTransacoes(){
         TransacaoRepository.clear();

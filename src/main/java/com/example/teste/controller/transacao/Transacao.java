@@ -15,7 +15,7 @@ import java.time.OffsetDateTime;
 @Setter
 public class Transacao {
     @NotNull
-    @PositiveOrZero(message = "Valor must be greater or equal to zero")
+//    @PositiveOrZero(message = "Valor must be greater or equal to zero")
     private BigDecimal valor;
     @NotNull
     private OffsetDateTime dataHora;
