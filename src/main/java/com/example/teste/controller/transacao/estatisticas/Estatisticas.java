@@ -1,8 +1,18 @@
 package com.example.teste.controller.transacao.estatisticas;
 
-import java.math.BigDecimal;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
+import java.util.DoubleSummaryStatistics;
+
+@AllArgsConstructor
+@NoArgsConstructor
 public class Estatisticas {
-    BigDecimal 
+    DoubleSummaryStatistics stat = new DoubleSummaryStatistics();
+    stat.
+
+    statistics.accept();
+
 
 }

@@ -1,7 +1,6 @@
 package com.example.teste.controller.transacao.exceptions;
 
 import com.example.teste.Error.ErrorResponse;
-import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
