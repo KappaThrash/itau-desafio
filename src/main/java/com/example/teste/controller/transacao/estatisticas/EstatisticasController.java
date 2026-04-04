@@ -2,17 +2,20 @@ package com.example.teste.controller.transacao.estatisticas;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/estatisticas")
 public class EstatisticasController{
 
-    @GetMapping
-    public ResponseEntity<Estatistica> getEstatisticas(){
+    private final EstatisticaService service;
 
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body(new EstatisticaService().getStats());
+    public EstatisticasController(EstatisticaService service){
+        this.service = service;
+    }
+
+    @GetMapping
+    public ResponseEntity<Estatistica> getEstatisticas(@RequestParam(defaultValue = "60") int interval){
+        return ResponseEntity.status(HttpStatus.OK).body(service.getStats(interval));
     }
 }

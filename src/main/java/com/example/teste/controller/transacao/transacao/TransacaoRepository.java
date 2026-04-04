@@ -1,4 +1,4 @@
-package com.example.teste.controller.transacao;
+package com.example.teste.controller.transacao.transacao;
 
 import org.springframework.stereotype.Repository;
 
