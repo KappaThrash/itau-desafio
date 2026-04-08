@@ -20,12 +20,11 @@ public class EstatisticaService {
     public Estatistica getStats(int Interval){
         List<Transacao> transacaoList = rep.getList();
         DoubleSummaryStatistics summary = new DoubleSummaryStatistics();
+        OffsetDateTime limite  = OffsetDateTime.now().minusSeconds(Interval);
 
-        for( Transacao transacoes : transacaoList ){
-            if(transacoes.getDataHora().isAfter(OffsetDateTime.now().minusSeconds(Interval))){
-                summary.accept(transacoes.getValor().doubleValue());
-            }
-        }
+        transacaoList.stream()
+                .filter(t -> t.getDataHora().isAfter(limite))
+                .forEach(t -> summary.accept(t.getValor().doubleValue()));
 
         return new Estatistica(summary.getCount(),
                 summary.getSum(),summary.getAverage(),
