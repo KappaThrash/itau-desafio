@@ -2,6 +2,9 @@
 
 Este é um desafio bacana tanto de desenvolvimento de software quanto de engenharia de software. Queremos testar sua capacidade de construir um software com várias partes diferentes funcionando em conjunto!
 
+Link do repo original: 
+https://github.com/feltex/desafio-itau-backend
+
 ## 1. Introdução
 
 Sua missão, caso você aceite, é criar uma API REST que recebe Transações e retorna Estatísticas sob essas transações. Para este desafio, a API deve ser criada utilizando-se de Java ou Kotlin e Spring Boot.
