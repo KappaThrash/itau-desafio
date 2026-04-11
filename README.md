@@ -1,23 +1,15 @@
 # Itaú Unibanco - Desafio de Programação
 
-Este é um desafio bacana tanto de desenvolvimento de software quanto de engenharia de software. Queremos testar sua capacidade de construir um software com várias partes diferentes funcionando em conjunto!
-
 Link do repo original: 
 https://github.com/feltex/desafio-itau-backend
 
 ## 1. Introdução
 
-Sua missão, caso você aceite, é criar uma API REST que recebe Transações e retorna Estatísticas sob essas transações. Para este desafio, a API deve ser criada utilizando-se de Java ou Kotlin e Spring Boot.
-
->**Dica:** Não existe uma forma certa ou errada de resolver o desafio! Vamos avaliar coisas como a qualidade do seu código, o quão fácil é de compreender o código, organização do projeto, quantidade e qualidade dos testes, preocupação com segurança e vários outros fatores :)
-
-## 2. Definição do desafio
-
-Neste desafio você deve **criar uma API REST** no [GitHub](https://github.com/) ou [GitLab](https://gitlab.com/). **Leia com atenção todas as instruções a seguir!**
+A missão, é criar uma API REST que recebe Transações e retorna Estatísticas sob essas transações. Para este desafio, a API deve ser criada utilizando-se de Java ou Kotlin e Spring Boot.
 
 ### 2.1. Restrições Técnicas
 
-Seu projeto:
+O projeto:
 
 - **DEVE** estar no [GitHub](https://github.com/) ou [GitLab](https://gitlab.com/)
 - **NÃO DEVE** fazer _fork_ de nenhum outro projeto
@@ -33,15 +25,13 @@ Seu projeto:
 - **DEVE** armazenar todos os dados **em memória**
 - **DEVE** aceitar e responder apenas com [JSON](https://www.json.org/json-pt.html)
 
->**Atenção!** Por motivos de segurança, não podemos aceitar projetos enviados como arquivos. Você **DEVE** disponibilizar seu projeto publicamente para que possamos acessá-lo e corrigi-lo! Após receber uma resposta de nós, sinta-se livre para tornar seu projeto **privado** :)
-
 ### 2.2. Endpoints da API
 
-A seguir serão especificados os endpoints que devem estar presentes na sua API e a funcionalidade esperada de cada um deles.
+A seguir serão especificados os endpoints da API e a funcionalidade de cada um deles.
 
 #### 2.2.1. Receber Transações: `POST /transacao`
 
-Este é o endpoint que irá receber as Transações. Cada transação consiste de um `valor` e uma `dataHora` de quando ela aconteceu:
+Este endpoint recebe Transações. Cada transação consiste de um `valor` e uma `dataHora` de quando ela aconteceu:
 
 ```json
 {
@@ -55,9 +45,8 @@ Os campos no JSON acima significam o seguinte:
 | Campo      | Significado                                                   | Obrigatório? |
 |------------|---------------------------------------------------------------|--------------|
 | `valor`    | **Valor em decimal com ponto flutuante** da transação         | Sim          |
-| `dataHora` | **Data/Hora no padrão ISO 8601** em que a transação aconteceu | Sim          |
+| `dataHora` | **Data/Hora no padrão ISO 8601 (`OffsetDateTime`)** em que a transação aconteceu | Sim          |
 
->**Dica:** O Spring Boot, por padrão, consegue compreender datas no padrão ISO 8601 sem problemas. Experimente utilizar um atributo do tipo `OffsetDateTime`!
 
 A API só aceitará transações que:
 
@@ -67,7 +56,7 @@ A API só aceitará transações que:
 4. A transação **NÃO DEVE** ter valor negativo
 5. A transação **DEVE** ter valor igual ou maior que `0` (zero)
 
-Como resposta, espera-se que este endpoint responda com:
+Como resposta, este endpoint responde com:
 
 - `201 Created` sem nenhum corpo
   - A transação foi aceita (ou seja foi validada, está válida e foi registrada)
@@ -78,16 +67,16 @@ Como resposta, espera-se que este endpoint responda com:
 
 #### 2.2.2. Limpar Transações: `DELETE /transacao`
 
-Este endpoint simplesmente **apaga todos os dados de transações** que estejam armazenados.
+Este endpoint **apaga todos os dados de transações** que estejam armazenados.
 
-Como resposta, espera-se que este endpoint responda com:
+Como resposta, este endpoint responde com:
 
 - `200 OK` sem nenhum corpo
   - Todas as informações foram apagadas com sucesso
 
 #### 2.2.3. Calcular Estatísticas: `GET /estatistica`
 
-Este endpoint deve retornar estatísticas das transações que **aconteceram nos últimos 60 segundos (1 minuto)**. As estatísticas que devem ser calculadas são:
+Este endpoint retorna estatísticas das transações que **aconteceram nos últimos 60 segundos (1 minuto)**. As estatísticas que devem ser calculadas são:
 
 ```json
 {
@@ -109,12 +98,8 @@ Os campos no JSON acima significam o seguinte:
 | `min`   | **Menor valor** transacionado nos últimos 60 segundos         | Sim          |
 | `max`   | **Maior valor** transacionado nos últimos 60 segundos         | Sim          |
 
->**Dica:** Há um objeto no Java 8+ chamado `DoubleSummaryStatistics` que pode lhe ajudar ou servir de inspiração.
-
-Como resposta, espera-se que este endpoint responda com:
+Como resposta, este endpoint responde com:
 
 - `200 OK` com os dados das estatísticas
   - Um JSON com os campos `count`, `sum`, `avg`, `min` e `max` todos preenchidos com seus respectivos valores
-  - **Atenção!** Quando não houverem transações nos últimos 60 segundos considere todos os valores como `0` (zero)
-
-9. **Configurações:** Você consegue deixar sua aplicação configurável em relação a quantidade de segundos para calcular as estatísticas? Por exemplo: o padrão é 60 segundos, mas e se o usuário quiser 120 segundos?
+  - **Atenção!** Quando não houverem transações nos últimos 60 segundos todos os valores serão `0` (zero)
