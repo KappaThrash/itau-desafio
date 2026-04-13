@@ -62,6 +62,15 @@ Como resposta, este endpoint responde com:
   - A transação foi aceita (ou seja foi validada, está válida e foi registrada)
 - `422 Unprocessable Entity` sem nenhum corpo
   - A transação **não** foi aceita por qualquer motivo (1 ou mais dos critérios de aceite não foram atendidos - por exemplo: uma transação com valor menor que `0`)
+```json
+{
+    "timestamp": "2026-04-12T23:17:46.9394678-03:00",
+    "status": 422,
+    "error": "Invalid Date",
+    "message": "dataHora invalido, pois está no futuro",
+    "path": "/transacao"
+}
+``` 
 - `400 Bad Request` sem nenhum corpo
   - A API não compreendeu a requisição do cliente (por exemplo: um JSON inválido)
 
