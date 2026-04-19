@@ -11,8 +11,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/transacao")
 public class TransacaoController {
-    //List<Transacao> transacoes = new ArrayList<>();
-
 
     private final TransacaoService service;
 
@@ -27,7 +25,7 @@ public class TransacaoController {
     }
     @GetMapping
     public ResponseEntity<List<Transacao>> getTransacao(){
-        return ResponseEntity.status(200).body(service.getTransacoes());
+        return ResponseEntity.status(HttpStatus.OK).body(service.getTransacoes());
     }
     @DeleteMapping
     public ResponseEntity<?> deleteTransacao(){

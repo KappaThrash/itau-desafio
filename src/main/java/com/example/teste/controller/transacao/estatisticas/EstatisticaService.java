@@ -16,11 +16,10 @@ public class EstatisticaService {
         this.rep = rep;
     }
 
-
     public Estatistica getStats(int Interval){
         List<Transacao> transacaoList = rep.getList();
         DoubleSummaryStatistics summary = new DoubleSummaryStatistics();
-        OffsetDateTime limite  = OffsetDateTime.now().minusSeconds(Interval);
+        OffsetDateTime limite = OffsetDateTime.now().minusSeconds(Interval);
 
         transacaoList.stream()
                 .filter(t -> t.getDataHora().isAfter(limite))
