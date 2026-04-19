@@ -83,7 +83,7 @@ Como resposta, este endpoint responde com:
 - `200 OK` sem nenhum corpo
   - Todas as informações foram apagadas com sucesso
 
-#### 2.2.3. Calcular Estatísticas: `GET /estatistica` / `GET /estatistica?interval={int em segundos}` 
+#### 2.2.3. Calcular Estatísticas: `GET /estatistica` | `/estatistica?interval={int em segundos}` 
 
 Este endpoint retorna por padrão estatísticas das transações que **aconteceram nos últimos 60 segundos (1 minuto)**, para alterar o intervalo de tempo, use ?interval={tempo}. As estatísticas que devem ser calculadas são:
 
