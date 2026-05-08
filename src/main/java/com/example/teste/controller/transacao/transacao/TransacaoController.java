@@ -19,9 +19,8 @@ public class TransacaoController {
     }
 
     @PostMapping
-    public ResponseEntity<?> postTransacao(@RequestBody @Valid Transacao transacao){
-        service.addTransacao(transacao);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+    public ResponseEntity<Transacao> postTransacao(@RequestBody @Valid Transacao transacao){
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.addTransacao(transacao));
     }
     @GetMapping
     public ResponseEntity<List<Transacao>> getTransacao(){

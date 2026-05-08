@@ -1,6 +1,7 @@
 package com.example.teste.controller.transacao.transacao;
 
 import com.example.teste.controller.transacao.exceptions.InvalidDateException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -10,28 +11,32 @@ import java.util.List;
 @Service
 public class TransacaoService {
 
-    private TransacaoRepository TransacaoRepository;
-    private OffsetDateTime now = OffsetDateTime.now();
+    @Autowired
+    private final TransacaoRepository transacaoRepository;
 
-    public TransacaoService(TransacaoRepository TransacaoRepository) {
-        this.TransacaoRepository = TransacaoRepository;
+    private final OffsetDateTime now = OffsetDateTime.now();
+
+    public TransacaoService(TransacaoRepository transacaoRepository) {
+        this.transacaoRepository = transacaoRepository;
     }
 
-    public void addTransacao( Transacao transacao ){
+    public Transacao addTransacao(Transacao transacao){
         if (transacao.getDataHora().isAfter(now)){
             throw new InvalidDateException("dataHora invalido, pois está no futuro");
-        } else if(transacao.getValor().compareTo(new BigDecimal(0)) < 0 ) {
-            throw new IllegalArgumentException("Valor negativo");
-        } else{
-        TransacaoRepository.save(transacao);
         }
+        if(transacao.getValor().compareTo(new BigDecimal(0)) < 0 ) {
+            throw new IllegalArgumentException("Valor negativo");
+        }
+
+        return transacaoRepository.save(transacao);
+
     }
     public void clearTransacoes(){
-        TransacaoRepository.clear();
+        transacaoRepository.clear();
     }
 
     public List<Transacao> getTransacoes(){
 
-        return TransacaoRepository.getList();
+        return transacaoRepository.getList();
     }
 }

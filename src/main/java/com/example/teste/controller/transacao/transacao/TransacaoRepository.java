@@ -9,8 +9,9 @@ import java.util.List;
 public class TransacaoRepository {
     private final static List<Transacao> transacoes = new ArrayList<>();
 
-    public void save(Transacao transacao){
+    public Transacao save(Transacao transacao){
         transacoes.add(transacao);
+        return transacao;
     }
 
     public void clear(){
